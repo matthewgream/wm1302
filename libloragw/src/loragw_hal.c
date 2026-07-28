@@ -257,7 +257,7 @@ static bool is_same_pkt(struct lgw_pkt_rx_s *p1, struct lgw_pkt_rx_s *p2) {
             -- datarate should be same
             -- payload should be same
         */
-        if ((abs(p1->count_us - p2->count_us) <= 24) &&
+        if ((abs((int)(p1->count_us - p2->count_us)) <= 24) &&
             (p1->if_chain == p2->if_chain) &&
             (p1->datarate == p2->datarate) &&
             (p1->size == p2->size) &&
@@ -835,7 +835,7 @@ int lgw_debug_setconf(struct lgw_conf_debug_s * conf) {
         CONTEXT_DEBUG.ref_payload[i].payload[3] = (uint8_t)(CONTEXT_DEBUG.ref_payload[i].id >> 0);
     }
 
-    if (conf->log_file_name != NULL) {
+    if (conf->log_file_name[0] != '\0') {
         strncpy(CONTEXT_DEBUG.log_file_name, conf->log_file_name, sizeof CONTEXT_DEBUG.log_file_name);
         CONTEXT_DEBUG.log_file_name[sizeof CONTEXT_DEBUG.log_file_name - 1] = '\0'; /* ensure string termination */
     }

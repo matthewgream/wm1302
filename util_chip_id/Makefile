@@ -20,13 +20,13 @@ ifeq '$(BUILD_MODE)' 'alpha'
 else ifeq '$(BUILD_MODE)' 'debug'
   $(warning /\/\/\/  Building in 'debug' mode \/\/\/\)
   WARN_CFLAGS   := -Wall -Wextra
-  OPT_CFLAGS    := -O2
+  OPT_CFLAGS    := -O3
   DEBUG_CFLAGS  := -g
   LDFLAGS       :=
 else ifeq  '$(BUILD_MODE)' 'release'
   $(warning /\/\/\/  Building in 'release' mode \/\/\/\)
   WARN_CFLAGS   := -Wall -Wextra
-  OPT_CFLAGS    := -O2 -ffunction-sections -fdata-sections
+  OPT_CFLAGS    := -O3 -ffunction-sections -fdata-sections
   DEBUG_CFLAGS  :=
   LDFLAGS       := -Wl,--gc-sections
 else

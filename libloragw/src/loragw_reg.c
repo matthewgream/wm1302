@@ -1137,7 +1137,7 @@ int reg_w(uint8_t spi_mux_target, struct lgw_reg_s r, int32_t reg_value) {
 
 int reg_r(uint8_t spi_mux_target, struct lgw_reg_s r, int32_t *reg_value) {
     int com_stat = LGW_REG_SUCCESS;
-    uint8_t bufu[4] = "\x00\x00\x00\x00";
+    uint8_t bufu[4] = { 0, 0, 0, 0 };
     int8_t *bufs = (int8_t *)bufu;
 
     if ((r.offs + r.leng) <= 8) {

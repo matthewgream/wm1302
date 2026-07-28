@@ -246,7 +246,7 @@ int lgw_spi_r(void *com_target, uint8_t spi_mux_target, uint16_t address, uint8_
 /* Single Byte Read-Modify-Write */
 int lgw_spi_rmw(void *com_target, uint8_t spi_mux_target, uint16_t address, uint8_t offs, uint8_t leng, uint8_t data) {
     int spi_stat = LGW_SPI_SUCCESS;
-    uint8_t buf[4] = "\x00\x00\x00\x00";
+    uint8_t buf[4] = { 0, 0, 0, 0 };
 
     /* Read */
     spi_stat += lgw_spi_r(com_target, spi_mux_target, address, &buf[0]);

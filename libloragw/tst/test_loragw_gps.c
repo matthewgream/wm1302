@@ -397,13 +397,13 @@ int main(int argc, char **argv)
 
         if (frame_end_idx) {
           /* Frames have been processed. Remove bytes to end of last processed frame */
-          memcpy(serial_buff,&serial_buff[frame_end_idx],wr_idx - frame_end_idx);
+          memmove(serial_buff,&serial_buff[frame_end_idx],wr_idx - frame_end_idx);
           wr_idx -= frame_end_idx;
         } /* ...for(rd_idx = 0... */
 
         /* Prevent buffer overflow */
         if ((sizeof(serial_buff) - wr_idx) < LGW_GPS_MIN_MSG_SIZE) {
-            memcpy(serial_buff,&serial_buff[LGW_GPS_MIN_MSG_SIZE],wr_idx - LGW_GPS_MIN_MSG_SIZE);
+            memmove(serial_buff,&serial_buff[LGW_GPS_MIN_MSG_SIZE],wr_idx - LGW_GPS_MIN_MSG_SIZE);
             wr_idx -= LGW_GPS_MIN_MSG_SIZE;
         }
     }

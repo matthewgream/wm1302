@@ -194,7 +194,7 @@ int sx1261_reg_r(sx1261_op_code_t op_code, uint8_t *data, uint16_t size) {
 int sx1261_load_pram(void) {
     int i, err;
     uint8_t buff[32];
-    char pram_version[SX1261_PRAM_VERSION_FULL_SIZE];
+    char pram_version[SX1261_PRAM_VERSION_FULL_SIZE + 1];
     uint32_t val, addr;
 
     /* Set Radio in Standby mode */

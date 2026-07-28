@@ -1278,7 +1278,7 @@ int sx1302_agc_mailbox_write(uint8_t mailbox, uint8_t value) {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 int sx1302_agc_start(uint8_t version, lgw_radio_type_t radio_type, uint8_t ana_gain, uint8_t dec_gain, bool full_duplex, bool lbt_enable) {
-    uint8_t val;
+    uint8_t val = 0;
     struct agc_gain_params_s agc_params;
     uint8_t pa_start_delay;
     uint8_t fdd_mode = ((full_duplex == true) ? 1 : 0);
@@ -1809,7 +1809,7 @@ void sx1302_arb_print_debug_stats(void) {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 int sx1302_arb_start(uint8_t version, const struct lgw_conf_ftime_s * ftime_context) {
-    uint8_t val;
+    uint8_t val = 0;
 
     /* Wait for ARB fw to be started, and VERSION available in debug registers */
     sx1302_arb_wait_status(0x01);
