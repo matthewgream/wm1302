@@ -1,0 +1,5 @@
+# WM1302 (Semtech SX1302 USB LoRaWAN concentrator) = an STM32 CDC-ACM device (0483:5740) that
+# enumerates as /dev/ttyACMx. Provide a stable /dev/wm1302 symlink + dialout access, tag it for
+# systemd, and (re)start the packet forwarder when the concentrator appears. The forwarder's
+# global_conf.json com_path points at /dev/wm1302.
+SUBSYSTEM=="tty", KERNEL=="ttyACM*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", SYMLINK+="wm1302", GROUP="dialout", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="lorawan2ttn.service"

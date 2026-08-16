@@ -1,0 +1,24 @@
+[Unit]
+Description=WM1302 sx1302_hal LoRaWAN packet forwarder to TTN eu1
+Documentation=https://github.com/Lora-net/sx1302_hal
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+# Don't run until the WM1302 concentrator is present; stop if it's unplugged. udev also pulls this
+# service in when /dev/wm1302 appears (ENV{SYSTEMD_WANTS} in 90-wm1302.rules), so it tracks hotplug.
+BindsTo=dev-wm1302.device
+After=dev-wm1302.device
+
+[Service]
+Type=simple
+# The HAL writes debug_conf.log_file relative to the working directory, so point that at a tmpfs
+# rather than wherever the unit happens to start: no stray files, and no needless SD card writes.
+RuntimeDirectory=lorawan2ttn
+WorkingDirectory=/run/lorawan2ttn
+ExecStart=/usr/bin/stdbuf -oL -eL /usr/local/bin/lorawan2ttn -c /etc/lorawan2ttn/global_conf.json
+SyslogIdentifier=lorawan2ttn
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
